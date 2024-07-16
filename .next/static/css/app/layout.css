@@ -787,6 +787,9 @@ video {
 .aspect-\[1155\/678\] {
   aspect-ratio: 1155/678;
 }
+.h-1 {
+  height: 0.25rem;
+}
 .h-10 {
   height: 2.5rem;
 }
@@ -819,9 +822,6 @@ video {
 }
 .h-full {
   height: 100%;
-}
-.h-1 {
-  height: 0.25rem;
 }
 .min-h-screen {
   min-height: 100vh;

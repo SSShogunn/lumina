@@ -1,4 +1,6 @@
 {
   "/dashboard/page": "app/dashboard/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/auth/[kindeAuth]/route": "app/api/auth/[kindeAuth]/route.js",
   "/api/trpc/[trpc]/route": "app/api/trpc/[trpc]/route.js"
 }
