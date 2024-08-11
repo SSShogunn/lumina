@@ -4,14 +4,17 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import NavBar from "../components/NavBar";
 import Providers from "../components/Providers";
+import { Toaster } from "@/components/ui/toaster";
+
 
 import "react-loading-skeleton/dist/skeleton.css"
+import "simplebar-react/dist/simplebar.min.css"
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Lumina",
-  description: "You PDF Ai",
+  description: "Your PDF Ai",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
@@ -19,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className="light">
       <Providers>
         <body className={cn(inter.className, 'min-h-screen font-sans antialiased grainy')}>
+          <Toaster />
           <NavBar />
           {children}
         </body>
