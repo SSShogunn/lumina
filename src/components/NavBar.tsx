@@ -10,7 +10,7 @@ const NavBar = async () => {
 
     const {getUser} = getKindeServerSession();
     const user = await getUser()
-
+    
     return (
         <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-xl transition-all'>
             <MaxWidthWrapper>
@@ -59,7 +59,7 @@ const NavBar = async () => {
                             <UserAccountNav  
                             name={!user.given_name || !user.family_name ? "Your Account" : `${user.given_name} ${user.family_name}`} 
                             email={user.email ?? ""}
-                            imageUrl={user.picture ?? ""}/>
+                            imageUrl={user.picture ?? ''}/>
                         </>}
                     </div>
                 </div>
