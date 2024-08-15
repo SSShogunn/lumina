@@ -8,11 +8,10 @@ import { PineconeStore } from "@langchain/pinecone";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
-import { metadata } from "@/app/layout";
 
 const f = createUploadthing();
 
-const auth = (req: Request) => ({ id: "fakeId" });
+const auth = (req: Request) => ({ id: "fakeId" }); // Mock function for authentication
 
 const middleware = async () => {
     const { getUser } = getKindeServerSession();
@@ -22,27 +21,26 @@ const middleware = async () => {
         throw new UploadThingError("UNAUTHORIZED");
     }
 
-    const subscriptionPlan = await getUserSubscriptionPlan()
+    const subscriptionPlan = await getUserSubscriptionPlan();
 
     return { subscriptionPlan, userId: user.id };
-}
+};
 
 const onUploadComplete = async ({ metadata, file }: {
-    metadata: Awaited<ReturnType<typeof middleware>>
+    metadata: Awaited<ReturnType<typeof middleware>>;
     file: {
-        key: string,
-        name: string,
-        url: string
-    }
+        key: string;
+        name: string;
+        url: string;
+    };
 }) => {
-
     const isFileExist = await db.file.findFirst({
         where: {
             id: file.key
         }
-    })
+    });
 
-    if (isFileExist) return
+    if (isFileExist) return;
 
     const fileUrl = `https://utfs.io/f/${file.key}`;
 
@@ -58,21 +56,21 @@ const onUploadComplete = async ({ metadata, file }: {
         });
 
         try {
-
             const response = await fetch(fileUrl);
             const blob = await response.blob();
 
             const loader = new PDFLoader(blob);
             const pageLevelDocs = await loader.load();
 
-            const pagesAmt = pageLevelDocs.length
+            const pagesAmt = pageLevelDocs.length;
 
-            const { subscriptionPlan } = metadata
-            const { isSubscribed } = subscriptionPlan
+            const { subscriptionPlan } = metadata;
+            const { isSubscribed } = subscriptionPlan;
 
-            const isProExceeded = pagesAmt > PLANS.find((plan) => plan.name === "Pro")!.pagesPerPdf
-            const isFreeExceeded = pagesAmt > PLANS.find((plan) => plan.name === "Free")!.pagesPerPdf;
+            const isProExceeded = pagesAmt > PLANS.find((plan) => plan.name === "Pro")!.pagesPerPdf;
+            const isFreeExceeded = pagesAmt > PLANS.find((plan) => plan.name === "free")!.pagesPerPdf;
 
+            console.log("This was executed ..... ")
             if ((isSubscribed && isProExceeded) || (!isSubscribed && isFreeExceeded)) {
                 await db.file.update({
                     data: {
@@ -81,14 +79,14 @@ const onUploadComplete = async ({ metadata, file }: {
                     where: {
                         id: createdFile.id
                     }
-                })
+                });
+                return;
             }
 
             const pineconeIndex = pinecone.Index("lumina");
             const embeddings = new OpenAIEmbeddings({
                 openAIApiKey: process.env.OPEN_API_KEY,
             });
-
 
             await PineconeStore.fromDocuments(
                 pageLevelDocs,
@@ -110,7 +108,6 @@ const onUploadComplete = async ({ metadata, file }: {
         } catch (err) {
             console.error("Error processing PDF file:", err);
 
-            // Update file status to FAILED
             await db.file.update({
                 data: {
                     uploadStatus: "FAILED"
@@ -123,7 +120,7 @@ const onUploadComplete = async ({ metadata, file }: {
     } catch (error) {
         console.error("Error creating file record:", error);
     }
-}
+};
 
 export const ourFileRouter = {
     freePlanUploader: f({ pdf: { maxFileSize: "4MB" } })
