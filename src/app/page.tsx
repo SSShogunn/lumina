@@ -44,6 +44,7 @@ export default function Home() {
                     width={1364}
                     height={86}
                     className="rounded-md bg-white sm:p-8 m:p-20 shadow-2xl ring-1 ring-gray-900/10"
+                    priority
                   />
                 </div>
               </div>
