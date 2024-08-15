@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import Dropzone from "react-dropzone";
 import { Cloud, File, Loader2 } from "lucide-react";
@@ -139,8 +139,8 @@ const UploadButton = ({ isSubscribed }: { isSubscribed: boolean }) => {
             <DialogTrigger asChild>
                 <Button onClick={() => setIsOpen(true)}>Upload PDF</Button>
             </DialogTrigger>
-            <DialogTitle/>
-            <DialogContent aria-describedby="uplaod-file">
+
+            <DialogContent>
                 <UploadDropzone isSubscribed={isSubscribed} />
             </DialogContent>
         </Dialog>
