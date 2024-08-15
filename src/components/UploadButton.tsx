@@ -118,7 +118,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
                                 </div>
                             ) : null}
 
-                            {/* <input {...getInputProps()} className="hidden" /> */}
+                            <input {...getInputProps()} className="hidden" />
                         </label>
                     </div>
                 </div>
