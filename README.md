@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="/public/thumbnail.png" alt="Lumina Banner" width="100%"/>
   <h1>Lumina - Give your PDFs Superpower</h1>
   <p>Your intelligent AI-powered PDF chat companion</p>
 </div>
