@@ -1,87 +1,136 @@
+<div align="center">
+  <img src="/public/thumbnail.png" alt="Lumina Banner" width="100%"/>
+  <h1>Lumina - Give your PDFs Superpower</h1>
+  <p>Your intelligent AI-powered PDF chat companion</p>
+</div>
 
-# 🌟 Lumina
+## 🎯 Overview
 
-## 📄 Description
+Lumina transforms how you interact with PDF documents by providing an intuitive chat interface powered by advanced AI. Upload your PDFs and start having natural conversations about their content instantly.
 
-Lumina is a cutting-edge SaaS product equipped with an AI-powered chatbot that allows users to seamlessly interact with PDFs by asking questions. The intelligent bot provides relevant, insightful answers, enhancing user experience and productivity.
+<div align="center">
+  <img src="/public/dashboard-preview.jpg" alt="Lumina Dashboard" width="100%"/>
+</div>
 
-## ✨ Features
+## ✨ Key Features
 
-- 🤖 **AI-Powered Chatbot**: Seamlessly interact with PDFs by asking questions and receive relevant, insightful answers from the intelligent bot.
-- 🔒 **Secure User Profile Storage**: Leveraged PlanetScale MySQL and Prisma to ensure secure user profile storage.
-- 🛡️ **Enhanced Data Safety**: Implemented the use of TRPC to enhance data safety between server and client.
-- 🚀 **Optimized Functionalities**: Utilized Pinecone and Langchain to optimize vector database and language model functionalities.
-- 🔐 **Authentication and Payments**: Integrated KindeAuth for authentication and Stripe for secure payments.
+- **🤖 AI-Powered Chat**: Have natural conversations with your PDF documents
+- **📱 Modern Interface**: Clean, responsive design that works on all devices
+- **🚀 Fast Processing**: Quick PDF parsing and real-time AI responses
+- **🔐 Secure Authentication**: Robust user authentication via KindeAuth
+- **💳 Flexible Pricing**: Simple and transparent subscription plans via Stripe
+- **📊 Smart Indexing**: Efficient document processing using Pinecone vector DB
+
+## 💡 How It Works
+
+<div align="center">
+  <img src="/public/file-upload-preview.jpg" alt="File Upload Interface" width="100%"/>
+</div>
+
+1. **Upload** - Simply drag and drop your PDF files
+2. **Process** - Our AI analyzes and indexes your document
+3. **Chat** - Ask questions and get intelligent responses
+4. **Learn** - Gain insights from your documents effortlessly
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js, React, Tailwind CSS, shadcn
-- **Backend**: TRPC, PlanetScale MySQL, Prisma
-- **AI & Data**: Pinecone, Langchain
-- **Payments**: Stripe
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Database**: PlanetScale (MySQL)
+- **ORM**: Prisma
 - **Authentication**: KindeAuth
-- **Languages**: TypeScript
+- **Payments**: Stripe
+- **AI & Vector DB**: LangChain, Pinecone
+- **API Layer**: tRPC
+- **PDF Processing**: pdf-parse
 
-## 🚀 Installation
+## 🚀 Getting Started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/lumina.git
-   cd lumina
-   ```
+### Prerequisites
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+- Node.js 18+
+- npm or yarn
+- PlanetScale account
+- Stripe account
+- KindeAuth account
+- Pinecone account
 
-3. Set up environment variables:
-   Create a `.env` file in the root directory and add the necessary environment variables:
-   ```env
-   DATABASE_URL=your_planetscale_database_url
-   STRIPE_SECRET_KEY=your_stripe_secret_key
-   KIND_AUTH_CLIENT_ID=your_kinde_auth_client_id
-   KIND_AUTH_CLIENT_SECRET=your_kinde_auth_client_secret
-   ```
+### Installation
 
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/lumina.git
+cd lumina
+```
 
-5. Open your browser and visit `http://localhost:3000`.
+2. Install dependencies
+```bash
+npm install
+```
 
-## 🛡️ Usage
+3. Set up environment variables
+```bash
+cp .env.example .env
+```
 
-1. 📝 Sign up or log in using KindeAuth.
-2. 📁 Upload your PDF documents.
-3. ❓ Ask questions about the content of the PDFs.
-4. 🤖 Receive relevant and insightful answers from the AI-powered chatbot.
-5. 💼 Manage your profile and payments through the user dashboard.
+4. Configure your environment variables in `.env`:
+```env
+# Database
+DATABASE_URL=
+
+# Authentication
+KINDE_CLIENT_ID=
+KINDE_CLIENT_SECRET=
+KINDE_ISSUER_URL=
+KINDE_SITE_URL=
+KINDE_POST_LOGOUT_REDIRECT_URL=
+KINDE_POST_LOGIN_REDIRECT_URL=
+
+# Stripe
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+# Upload Service
+UPLOADTHING_SECRET=
+UPLOADTHING_APP_ID=
+
+# Vector DB
+PINECONE_API_KEY=
+```
+
+5. Run the development server
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000` to see the application.
+
+## 📖 Usage
+
+1. **Create Account**: Sign up using your email or social accounts
+2. **Upload PDF**: Use the drag-and-drop interface to upload your documents
+3. **Start Chatting**: Ask questions about your document content
+4. **Manage Documents**: Access your document history and conversations
+5. **Subscription**: Choose a plan that fits your needs
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps to contribute:
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-1. 🍴 Fork the repository.
-2. 🌿 Create a new branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. 💻 Make your changes and commit them:
-   ```bash
-   git commit -m "Add feature"
-   ```
-4. 📤 Push to the branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. 🔄 Open a pull request.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📜 License
+## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-Happy Coding! 🚀
+<div align="center">
+  Made with ❤️ by [Your Name]
+</div>
