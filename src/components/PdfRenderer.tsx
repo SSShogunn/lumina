@@ -29,7 +29,6 @@ import {
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import SimpleBar from "simplebar-react";
-import PdfFullScreen from "./PdfFullScreen";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.mjs`;
 
@@ -177,7 +176,6 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
                     >
                         <RotateCw className="h-4 w-4" />
                     </Button>
-                    <PdfFullScreen fileUrl={url} />
                 </div>
             </div>
 

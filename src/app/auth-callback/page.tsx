@@ -25,11 +25,11 @@ const AuthCallbackPage = () => {
     return (
         <div className='w-full mt-24 flex justify-center'>
             <div className='flex flex-col items-center gap-2'>
-                {isLoading && <Loader2 className='h-8 w-8 animate-spin text-zinc-800' />}
-                <h3 className='font-semibold text-xl'>
+                {isLoading && <Loader2 className='h-8 w-8 animate-spin text-primary' />}
+                <h3 className='font-semibold text-xl text-foreground'>
                     Setting up your account...
                 </h3>
-                <p>You will be redirected automatically.</p>
+                <p className='text-muted-foreground'>You will be redirected automatically.</p>
             </div>
         </div>
     )

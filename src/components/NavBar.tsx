@@ -20,18 +20,10 @@ const NavBar = async () => {
                         <span>Lumina.</span>
                     </Link>
 
-                    <MobileNav isAuth={!!user}/>
+                    <MobileNav isAuth={!!user} />
 
                     <div className='hidden items-center space-x-4 sm:flex'>
                         {!user ? <>
-                            <Link href="/pricing" className={buttonVariants(
-                                {
-                                    variant: "ghost",
-                                    size: 'sm'
-                                }
-                            )}>
-                                Pricing
-                            </Link>
                             <LoginLink className={buttonVariants(
                                 {
                                     variant: "ghost",

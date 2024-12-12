@@ -1,12 +1,11 @@
-import { getUserSubscriptionPlan } from "@/lib/stripe"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
 import { Button } from "./ui/button"
 import { Avatar, AvatarFallback } from "./ui/avatar"
 import Image from "next/image"
-import { Icons } from "./icons"
 import Link from "next/link"
 import { Gem } from "lucide-react"
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components"
+import { User } from "lucide-react"
 
 interface UserAccountNavProps {
     email: string | undefined,
@@ -16,7 +15,6 @@ interface UserAccountNavProps {
 
 export const UserAccountNav = async ({ email, imageUrl, name }: UserAccountNavProps) => {
 
-    const subscriptionPlan = await getUserSubscriptionPlan()
 
     return (
         <DropdownMenu>
@@ -30,7 +28,7 @@ export const UserAccountNav = async ({ email, imageUrl, name }: UserAccountNavPr
                         ) : (
                             <AvatarFallback>
                                 <span className="sr-only">{name}</span>
-                                <Icons.user className="h-4 w-4 text-zinc-900" />
+                                <User className="h-4 w-4 text-zinc-900" />
                             </AvatarFallback>
                         )}
                     </Avatar>
@@ -51,25 +49,6 @@ export const UserAccountNav = async ({ email, imageUrl, name }: UserAccountNavPr
                         )}
                     </div>
                 </div>
-
-                <DropdownMenuSeparator />
-
-                <DropdownMenuItem asChild>
-                    <Link href="/dashboard">Dashboard</Link>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem asChild>
-                    {subscriptionPlan.isSubscribed ? (
-                        <Link href="/dashboard/billing">Manage Subscription</Link>
-                    ) : (
-                        <Link href="/pricing">
-                            Upgrade{' '}
-                            <Gem className="text-blue-600 h-4 w-4 ml-1.5" />
-                        </Link>
-                    )}
-                </DropdownMenuItem>
-
-                <DropdownMenuSeparator />
 
                 <DropdownMenuItem className="cursor-pointer">
                     <LogoutLink>Logout</LogoutLink>

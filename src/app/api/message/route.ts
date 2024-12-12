@@ -121,9 +121,6 @@ export const POST = async (req: NextRequest) => {
                 controller.close();
             },
         });
-
-
-
         return new NextResponse(readableStream, {
             headers: { "Content-Type": "text/event-stream" },
         });

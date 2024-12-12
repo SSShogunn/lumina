@@ -6,12 +6,8 @@ import { pinecone } from "@/lib/pinecone";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { PineconeStore } from "@langchain/pinecone";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
-import { getUserSubscriptionPlan } from "@/lib/stripe";
-import { PLANS } from "@/config/stripe";
 
 const f = createUploadthing();
-
-const auth = (req: Request) => ({ id: "fakeId" }); // Mock function for authentication
 
 const middleware = async () => {
     const { getUser } = getKindeServerSession();
@@ -21,9 +17,7 @@ const middleware = async () => {
         throw new UploadThingError("UNAUTHORIZED");
     }
 
-    const subscriptionPlan = await getUserSubscriptionPlan();
-
-    return { subscriptionPlan, userId: user.id };
+    return { userId: user.id };
 };
 
 const onUploadComplete = async ({ metadata, file }: {
@@ -61,27 +55,6 @@ const onUploadComplete = async ({ metadata, file }: {
 
             const loader = new PDFLoader(blob);
             const pageLevelDocs = await loader.load();
-
-            const pagesAmt = pageLevelDocs.length;
-
-            const { subscriptionPlan } = metadata;
-            const { isSubscribed } = subscriptionPlan;
-
-            const isProExceeded = pagesAmt > PLANS.find((plan) => plan.name === "Pro")!.pagesPerPdf;
-            const isFreeExceeded = pagesAmt > PLANS.find((plan) => plan.name === "free")!.pagesPerPdf;
-
-            console.log("This was executed ..... ")
-            if ((isSubscribed && isProExceeded) || (!isSubscribed && isFreeExceeded)) {
-                await db.file.update({
-                    data: {
-                        uploadStatus: "FAILED"
-                    },
-                    where: {
-                        id: createdFile.id
-                    }
-                });
-                return;
-            }
 
             const pineconeIndex = pinecone.Index("lumina");
             const embeddings = new OpenAIEmbeddings({
@@ -123,10 +96,7 @@ const onUploadComplete = async ({ metadata, file }: {
 };
 
 export const ourFileRouter = {
-    freePlanUploader: f({ pdf: { maxFileSize: "4MB" } })
-        .middleware(middleware)
-        .onUploadComplete(onUploadComplete),
-    proPlanUploader: f({ pdf: { maxFileSize: "16MB" } })
+    pdfUploader: f({ pdf: { maxFileSize: "8MB" } })
         .middleware(middleware)
         .onUploadComplete(onUploadComplete),
 } satisfies FileRouter;

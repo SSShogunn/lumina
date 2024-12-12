@@ -16,7 +16,7 @@ export function absoluteUrl(path: string) {
 
 export function constructMetadata({
   title = "Lumina - The AI for PDFs",
-  description = "Lumina is open-source software that makes interacting with your PDF files seamless and efficient.",
+  description = "Lumina is software that makes interacting with your PDF files seamless and efficient.",
   image = "/thumbnail.png",
   icons = "/favicon.ico",
   noIndex = false,

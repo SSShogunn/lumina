@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 import { ExtendedMessage } from "@/types/message";
-import { Icons } from "../icons";
 import ReactMarkdown from "react-markdown";
 import { format } from "date-fns";
 import { forwardRef } from "react";
+import { User, Bot } from "lucide-react";
 
 interface MessageProps {
     message: ExtendedMessage;
@@ -49,9 +49,9 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
             >
                 <div className={avatarClasses}>
                     {isUserMessage ? (
-                        <Icons.user className="fill-zinc-200 text-zinc-200 h-3/4 w-3/4" />
+                        <User className="fill-zinc-200 text-zinc-200 h-3/4 w-3/4" />
                     ) : (
-                        <Icons.logo className="fill-zinc-300 h-3/4 w-3/4" />
+                        <Bot className="fill-zinc-300 text-zinc-300 h-3/4 w-3/4" />
                     )}
                 </div>
                 <div className={messageClasses}>
