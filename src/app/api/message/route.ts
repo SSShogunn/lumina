@@ -75,7 +75,7 @@ export const POST = async (req: NextRequest) => {
             messages: [
                 {
                     role: "system",
-                    content: `You are Lumina's AI assistant, specialized in analyzing and discussing PDF documents. Your responses should be:
+                    content: `Your name is Lumina. You are an AI assistant, specialized in analyzing and discussing PDF documents. Your responses should be:
                             1. Precise and directly related to the uploaded PDF content
                             2. Formatted in clean, readable markdown
                             3. Include direct quotes from the document when relevant, using '>' for quotations
