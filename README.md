@@ -18,6 +18,7 @@ Lumina transforms how you interact with PDF documents by providing an intuitive 
 - **🚀 Fast Processing**: Quick PDF parsing and real-time AI responses
 - **🔐 Secure Authentication**: Robust user authentication via KindeAuth
 - **📊 Smart Indexing**: Efficient document processing using Pinecone vector DB
+- **☁️ Cloud Storage**: Reliable file storage with AWS S3
 
 ## 💡 How It Works
 
@@ -38,6 +39,7 @@ Lumina transforms how you interact with PDF documents by providing an intuitive 
 - **Database**: Supabase (Postgresql)
 - **Authentication**: KindeAuth
 - **Vector DB**: Pinecone
+- **Storage**: AWS S3
 
 ## 🚀 Getting Started
 
@@ -48,6 +50,7 @@ Lumina transforms how you interact with PDF documents by providing an intuitive 
 - Supabase account
 - KindeAuth account
 - Pinecone account
+- AWS account with S3 bucket
 
 ### Installation
 
@@ -80,9 +83,11 @@ KINDE_SITE_URL=
 KINDE_POST_LOGOUT_REDIRECT_URL=
 KINDE_POST_LOGIN_REDIRECT_URL=
 
-# Upload Service
-UPLOADTHING_SECRET=
-UPLOADTHING_APP_ID=
+# AWS S3
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+AWS_BUCKET_NAME=
 
 # Vector DB
 PINECONE_API_KEY=
