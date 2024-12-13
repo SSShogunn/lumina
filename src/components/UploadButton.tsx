@@ -12,18 +12,16 @@ import { Button } from "./ui/button";
 import Dropzone from "react-dropzone";
 import { Cloud, File, Loader2 } from "lucide-react";
 import { Progress } from "./ui/progress";
-import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "./ui/use-toast";
 import { trpc } from "@/app/_trpc/client";
 import { useRouter } from "next/navigation";
+import { uploadFile } from "@/lib/file-upload";
 
 const UploadDropzone = () => {
     const router = useRouter();
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
     const { toast } = useToast();
-
-    const { startUpload } = useUploadThing("pdfUploader");
 
     const { mutate: startPolling } = trpc.getFile.useMutation({
         onSuccess: (file) => {
@@ -54,21 +52,24 @@ const UploadDropzone = () => {
             onDrop={async (acceptedFiles) => {
                 setIsUploading(true);
                 const progressInterval = startProgress();
+
                 try {
-                    const res = await startUpload(acceptedFiles);
-                    if (!res) {
-                        throw new Error("Upload failed");
+                    const file = acceptedFiles[0];
+                    
+                    if (!file) {
+                        throw new Error("No file selected");
                     }
 
-                    const [fileResponse] = res;
-                    const key = fileResponse?.key;
-                    if (!key) {
-                        throw new Error("No file key returned");
+                    const response = await uploadFile(file);
+                    
+                    if (!response?.fileId) {
+                        throw new Error("Upload failed");
                     }
 
                     clearInterval(progressInterval);
                     setUploadProgress(100);
-                    startPolling({ key });
+                    
+                    startPolling({ key: response.fileId });
                 } catch (error) {
                     console.error(error);
                     clearInterval(progressInterval);
@@ -80,6 +81,10 @@ const UploadDropzone = () => {
                     });
                 }
             }}
+            accept={{
+                'application/pdf': ['.pdf']
+            }}
+            maxSize={8 * 1024 * 1024}
         >
             {({ getRootProps, getInputProps, acceptedFiles }) => (
                 <div
@@ -93,7 +98,7 @@ const UploadDropzone = () => {
                                 <p className="mb-2 text-sm text-zinc-700">
                                     Click to upload or drag & drop
                                 </p>
-                                <p className="text-xs text-zinc-500">PDF 4MB</p>
+                                <p className="text-xs text-zinc-500">PDF (up to 8MB)</p>
                             </div>
                             {acceptedFiles && acceptedFiles[0] ? (
                                 <div className="max-w-xs bg-white flex items-center rounded-md overflow-hidden outline outline-[1px] outline-zinc-200 divide-x divide-zinc-200">
@@ -148,8 +153,8 @@ const UploadButton = () => {
             </DialogTrigger>
 
             <DialogContent>
-                <DialogTitle className="text-xl font-semibold mb-2">
-                    Upload your PDF
+                <DialogTitle className="text-xl mb-2">
+                    Upload your PDF (Max file size: 8MB)
                 </DialogTitle>
                 <DialogDescription className="text-sm text-gray-600 mb-4 hidden">
                 </DialogDescription>

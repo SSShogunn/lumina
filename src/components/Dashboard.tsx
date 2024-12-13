@@ -31,7 +31,7 @@ const Dashboard = () => {
     return (
         <main className="mx-auto max-w-7xl md:p-10">
             <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 px-2 sm:flex-row sm:items-center sm:gap-0">
-                <h1 className="mb-3 font-bold text-4xl text-gray-900">My Files</h1>
+                <h1 className="mb-3 font- text-4xl text-gray-900">My Files</h1>
                 <UploadButton />
             </div>
 
@@ -50,7 +50,7 @@ const Dashboard = () => {
                                             </div>
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h3 className="text-lg font-semibold text-gray-900 truncate">
+                                            <h3 className="text-xl text-gray-900 truncate">
                                                 {file.name.split('.')[0]}
                                             </h3>
                                         </div>
